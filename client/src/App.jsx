@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import LivretFamille from './contracts/LivretFamille.json';
 import getWeb3 from './getWeb3';
 
-
 class App extends Component {
   state = {
     web3: null,
@@ -35,11 +34,12 @@ class App extends Component {
     }
   };
 
-  getDetails = async () => {
-    const { accounts, contract } = this.state;
-    const response = await contract.methods.getDetails().call({ from: accounts[0] });
-    this.setState({ details: response });
-  };
+  // Supprimez cette fonction ou remplacez-la par la bonne méthode du contrat
+  // getDetails = async () => {
+  //   const { accounts, contract } = this.state;
+  //   const response = await contract.methods.getDetails().call({ from: accounts[0] });
+  //   this.setState({ details: response });
+  // };
 
   render() {
     if (!this.state.web3) {
@@ -49,7 +49,8 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Livret de Famille</h1>
-        <button onClick={this.getDetails}>Obtenir les détails</button>
+        {/* Supprimez ou remplacez ce bouton si la méthode getDetails n'est pas utilisée */}
+        {/* <button onClick={this.getDetails}>Obtenir les détails</button> */}
         {this.state.details && (
           <div>
             <p>Nom époux 1: {this.state.details.spouse1.name}</p>
