@@ -69,6 +69,23 @@ contract LivretFamille {
             revert("Cette personne n'est pas trouvee dans ce livret de famille.");
         }
     }
-
+    function getSpouses() public view returns (Person memory spouse1, Person memory spouse2) {
+        FamilyBook storage book = familyBooks[msg.sender];
+        return (book.spouse1, book.spouse2);
+} 
+    function getChildren() public view returns (string[] memory, uint256[] memory, bool[] memory) {
+        uint256 childrenCount = familyBooks[msg.sender].childrenCount;
+        string[] memory names = new string[](childrenCount);
+        uint256[] memory birthDates = new uint256[](childrenCount);
+        bool[] memory isAliveArray = new bool[](childrenCount);
     
+        for (uint256 i = 0; i < childrenCount; i++) {
+            Person storage child = familyBooks[msg.sender].children[i];
+            names[i] = child.name;
+            birthDates[i] = child.birthDate;
+            isAliveArray[i] = child.isAlive;
+        }
+    
+        return (names, birthDates, isAliveArray);
+}
 }
